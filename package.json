@@ -38,6 +38,14 @@
       {
         "command": "turtcode.adjustTemperature",
         "title": "TurtCode: Adjust Temperature"
+      },
+      {
+        "command": "turtcode.unlockHat",
+        "title": "TurtCode: Unlock New Hat"
+      },
+      {
+        "command": "turtcode.renameTurtle",
+        "title": "TurtCode: Rename Turtle"
       }
     ]
   },

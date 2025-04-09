@@ -51,6 +51,14 @@ export class TurtleWebviewPanel {
             this.turtleManager.adjustTemperature(message.value);
             this.update();
             return;
+          case 'unlockHat':
+            vscode.commands.executeCommand('turtcode.unlockHat');
+            this.update();
+            return;
+          case 'rename':
+            vscode.commands.executeCommand('turtcode.renameTurtle')
+              .then(() => this.update());
+            return;
         }
       },
       null,
@@ -283,6 +291,8 @@ export class TurtleWebviewPanel {
           <button id="love-button" class="action-button">❤️ Pet</button>
           <button id="clean-button" class="action-button">🧹 Clean</button>
           <button id="temp-button" class="action-button">🌡️ Set Temperature</button>
+          <button id="unlock-hat-button" class="action-button">🎩 Unlock Hat</button>
+          <button id="rename-button" class="action-button">✏️ Rename</button>
         </div>
       </div>
       
@@ -371,6 +381,14 @@ export class TurtleWebviewPanel {
         document.getElementById('temp-button').addEventListener('click', () => {
           const tempValue = document.getElementById('temperature-slider').value;
           vscode.postMessage({ command: 'adjustTemperature', value: parseInt(tempValue) });
+        });
+        
+        document.getElementById('unlock-hat-button').addEventListener('click', () => {
+          vscode.postMessage({ command: 'unlockHat' });
+        });
+        
+        document.getElementById('rename-button').addEventListener('click', () => {
+          vscode.postMessage({ command: 'rename' });
         });
       </script>
     </body>

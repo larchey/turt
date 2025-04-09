@@ -57,4 +57,35 @@ export function registerCommands(context: vscode.ExtensionContext, turtleManager
       }
     })
   );
+  
+  // Register unlock hat command
+  context.subscriptions.push(
+    vscode.commands.registerCommand('turtcode.unlockHat', () => {
+      const newHat = turtleManager.unlockRandomHat();
+      if (newHat) {
+        vscode.window.showInformationMessage(`🎉 Your turtle unlocked a new hat: ${newHat}!`);
+      } else {
+        vscode.window.showInformationMessage('Your turtle already has all available hats!');
+      }
+    })
+  );
+  
+  // Register rename turtle command
+  context.subscriptions.push(
+    vscode.commands.registerCommand('turtcode.renameTurtle', async () => {
+      const turtle = turtleManager.getTurtle();
+      if (!turtle) { return; }
+      
+      const name = await vscode.window.showInputBox({
+        placeHolder: 'Enter a new name for your turtle',
+        prompt: 'Rename Your Turtle',
+        value: turtle.getAttributes().getName()
+      });
+      
+      if (name) {
+        turtleManager.renameTurtle(name);
+        vscode.window.showInformationMessage(`Your turtle has been renamed to ${name}!`);
+      }
+    })
+  );
 }
