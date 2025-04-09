@@ -187,8 +187,18 @@ export class TurtleWebviewPanel {
         <h1>🐢 ${attributes.getName()}</h1>
         
         <div class="turtle-container idle">
-          <img src="${turtleIdleUri}" alt="Your Turtle" class="pixel-turtle shell-${attributes.getColor().toLowerCase()} eyes-${attributes.getEyeType().toLowerCase()} size-${attributes.getSize().toLowerCase()} rarity-${attributes.getShellRarity()}" id="turtle-image" />
-          ${hatUri ? `<img src="${hatUri}" alt="Hat" class="turtle-hat" />` : ''}
+          <!-- Get appropriate shell image based on shell type -->
+          <div class="turtle-display">
+            <div class="turtle-body">
+              <img src="${this.getShellImageUri(attributes.getShellType())}" alt="Turtle Shell" 
+                   class="turtle-shell shell-${attributes.getColor().toLowerCase()} rarity-${attributes.getShellRarity()}" />
+              <img src="${this.getEyesImageUri(attributes.getEyeType())}" alt="Turtle Eyes" 
+                   class="turtle-eyes" />
+              <img src="${turtleIdleUri}" alt="Your Turtle" 
+                   class="pixel-turtle size-${attributes.getSize().toLowerCase()}" id="turtle-image" />
+            </div>
+            ${hatUri ? `<img src="${hatUri}" alt="Hat" class="turtle-hat" />` : ''}
+          </div>
           
           <div class="temperature-indicator">
             <div class="temperature-fill" style="height: ${Math.min(100, Math.max(0, ((needsStatus.temperature - 50) / 50) * 100))}%;"></div>
@@ -405,6 +415,74 @@ export class TurtleWebviewPanel {
     } else {
       return '#e74c3c'; // Red for critical values
     }
+  }
+  
+  private getShellImageUri(shellType: string): vscode.Uri {
+    // Map shell type to image file
+    let shellFileName = 'shell_classic.svg';
+    
+    // Convert shellType to lowercase and remove special characters for filename
+    const normalizedType = shellType.toLowerCase().replace(/[^a-z0-9]/g, '');
+    
+    // Map common shell types to their image files
+    switch (normalizedType) {
+      case 'spiked':
+        shellFileName = 'shell_spiked.svg';
+        break;
+      case 'patterned':
+        shellFileName = 'shell_patterned.svg';
+        break;
+      case 'crystal':
+        shellFileName = 'shell_crystal.svg';
+        break;
+      case 'golden':
+      case 'ruby':
+      case 'emerald':
+      case 'sapphire':
+      case 'diamond':
+      case 'glowing':
+      case 'metallic':
+        shellFileName = 'shell_golden.svg';
+        break;
+      default:
+        shellFileName = 'shell_classic.svg';
+    }
+    
+    return this.panel.webview.asWebviewUri(
+      vscode.Uri.joinPath(this.extensionContext.extensionUri, 'media', 'images', 'turtle', 'shells', shellFileName)
+    );
+  }
+  
+  private getEyesImageUri(eyeType: string): vscode.Uri {
+    // Map eye type to image file
+    let eyesFileName = 'eyes_black.svg';
+    
+    // Convert eyeType to lowercase and remove special characters for filename
+    const normalizedType = eyeType.toLowerCase().replace(/[^a-z0-9]/g, '');
+    
+    // Map eye types to their image files
+    switch (normalizedType) {
+      case 'blue':
+      case 'green':
+      case 'brown':
+      case 'red':
+      case 'purple':
+      case 'yellow':
+        eyesFileName = 'eyes_blue.svg'; // For now, all colored eyes use blue template
+        break;
+      case 'glowing':
+        eyesFileName = 'eyes_glowing.svg';
+        break;
+      case 'heterochromia':
+        eyesFileName = 'eyes_heterochromia.svg';
+        break;
+      default:
+        eyesFileName = 'eyes_black.svg';
+    }
+    
+    return this.panel.webview.asWebviewUri(
+      vscode.Uri.joinPath(this.extensionContext.extensionUri, 'media', 'images', 'turtle', 'eyes', eyesFileName)
+    );
   }
 
   private dispose(): void {

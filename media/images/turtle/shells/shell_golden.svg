@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="56" height="48" viewBox="0 0 56 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Golden Shell - Pixel Art Style -->
+  <rect x="0" y="0" width="56" height="48" fill="none"/>
+  <rect x="0" y="0" width="56" height="48" fill="#B7942A"/>
+  <rect x="4" y="4" width="48" height="40" fill="#D4AF37"/>
+  <rect x="8" y="8" width="40" height="32" fill="#FFD700"/>
+  <!-- Gold Patterns -->
+  <rect x="12" y="12" width="8" height="8" fill="#FFF2CC"/>
+  <rect x="24" y="12" width="8" height="8" fill="#FFF2CC"/>
+  <rect x="36" y="12" width="8" height="8" fill="#FFF2CC"/>
+  <rect x="12" y="24" width="8" height="8" fill="#FFF2CC"/>
+  <rect x="24" y="24" width="8" height="8" fill="#FFF2CC"/>
+  <rect x="36" y="24" width="8" height="8" fill="#FFF2CC"/>
+  <!-- Shine Effects -->
+  <rect x="14" y="14" width="4" height="4" fill="#FFFFFF"/>
+  <rect x="26" y="14" width="4" height="4" fill="#FFFFFF"/>
+  <rect x="38" y="14" width="4" height="4" fill="#FFFFFF"/>
+  <rect x="14" y="26" width="4" height="4" fill="#FFFFFF"/>
+  <rect x="26" y="26" width="4" height="4" fill="#FFFFFF"/>
+  <rect x="38" y="26" width="4" height="4" fill="#FFFFFF"/>
+</svg>

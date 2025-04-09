@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="56" height="48" viewBox="0 0 56 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Crystal Shell - Pixel Art Style -->
+  <rect x="0" y="0" width="56" height="48" fill="none"/>
+  <rect x="0" y="0" width="56" height="48" fill="#3A7CA5"/>
+  <rect x="4" y="4" width="48" height="40" fill="#4C94C4"/>
+  <rect x="8" y="8" width="40" height="32" fill="#64B5E8"/>
+  <!-- Crystal Facets -->
+  <rect x="16" y="12" width="8" height="8" fill="#8ED2FF"/>
+  <rect x="32" y="12" width="8" height="8" fill="#8ED2FF"/>
+  <rect x="24" y="20" width="8" height="8" fill="#8ED2FF"/>
+  <rect x="16" y="28" width="8" height="8" fill="#8ED2FF"/>
+  <rect x="32" y="28" width="8" height="8" fill="#8ED2FF"/>
+  <!-- Shine Effects -->
+  <rect x="18" y="14" width="4" height="4" fill="#FFFFFF"/>
+  <rect x="34" y="14" width="4" height="4" fill="#FFFFFF"/>
+  <rect x="26" y="22" width="4" height="4" fill="#FFFFFF"/>
+  <rect x="18" y="30" width="4" height="4" fill="#FFFFFF"/>
+  <rect x="34" y="30" width="4" height="4" fill="#FFFFFF"/>
+</svg>
