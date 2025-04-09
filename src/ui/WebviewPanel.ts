@@ -128,131 +128,64 @@ export class TurtleWebviewPanel {
     const needsStatus = needs.getStatus();
     const statsStatus = stats.getStatus();
     
+    // Get URI for CSS file
+    const styleUri = this.panel.webview.asWebviewUri(
+      vscode.Uri.joinPath(this.extensionContext.extensionUri, 'media', 'css', 'style.css')
+    );
+    
+    // Get URIs for turtle images
+    const turtleBaseUri = this.panel.webview.asWebviewUri(
+      vscode.Uri.joinPath(this.extensionContext.extensionUri, 'media', 'images', 'turtle', 'turtle_base.svg')
+    );
+    
+    const turtleIdleUri = this.panel.webview.asWebviewUri(
+      vscode.Uri.joinPath(this.extensionContext.extensionUri, 'media', 'images', 'turtle', 'turtle_idle.svg')
+    );
+    
+    const turtleEatingUri = this.panel.webview.asWebviewUri(
+      vscode.Uri.joinPath(this.extensionContext.extensionUri, 'media', 'images', 'turtle', 'turtle_eating.svg')
+    );
+    
+    const turtleWalkingUri = this.panel.webview.asWebviewUri(
+      vscode.Uri.joinPath(this.extensionContext.extensionUri, 'media', 'images', 'turtle', 'turtle_walking.svg')
+    );
+    
+    const turtleHappyUri = this.panel.webview.asWebviewUri(
+      vscode.Uri.joinPath(this.extensionContext.extensionUri, 'media', 'images', 'turtle', 'turtle_happy.svg')
+    );
+    
+    const turtleCleaningUri = this.panel.webview.asWebviewUri(
+      vscode.Uri.joinPath(this.extensionContext.extensionUri, 'media', 'images', 'turtle', 'turtle_cleaning.svg')
+    );
+    
+    // Get hat URI if turtle has a hat
+    let hatUri = null;
+    if (attributes.getHat()) {
+      hatUri = this.panel.webview.asWebviewUri(
+        vscode.Uri.joinPath(this.extensionContext.extensionUri, 'media', 'images', 'hats', `hat_${attributes.getHat().toLowerCase()}.svg`)
+      );
+    }
+    
     return `<!DOCTYPE html>
     <html lang="en">
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>TurtCode</title>
-      <style>
-        body {
-          font-family: Arial, sans-serif;
-          padding: 20px;
-          background-color: #f0f0f0;
-          color: #333;
-        }
-        .container {
-          max-width: 800px;
-          margin: 0 auto;
-          background-color: white;
-          border-radius: 10px;
-          padding: 20px;
-          box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        h1 {
-          color: #2c3e50;
-          text-align: center;
-        }
-        .turtle-info {
-          display: flex;
-          flex-wrap: wrap;
-          margin-bottom: 20px;
-        }
-        .turtle-portrait {
-          width: 200px;
-          height: 200px;
-          background-color: #e0f7fa;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 100px;
-          margin: 0 auto 20px auto;
-          position: relative;
-        }
-        .turtle-hat {
-          position: absolute;
-          top: -30px;
-          font-size: 40px;
-          transform: translateX(-50%);
-          left: 50%;
-        }
-        .info-section {
-          flex: 1;
-          min-width: 250px;
-          margin: 10px;
-        }
-        .info-card {
-          background-color: #f5f5f5;
-          border-radius: 5px;
-          padding: 15px;
-          margin-bottom: 15px;
-        }
-        .info-card h3 {
-          margin-top: 0;
-          border-bottom: 1px solid #ddd;
-          padding-bottom: 5px;
-        }
-        .progress-bar {
-          height: 10px;
-          background-color: #e0e0e0;
-          border-radius: 5px;
-          margin-top: 5px;
-          overflow: hidden;
-        }
-        .progress-bar-fill {
-          height: 100%;
-          border-radius: 5px;
-        }
-        .actions {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 10px;
-          margin-top: 20px;
-        }
-        button {
-          background-color: #3498db;
-          color: white;
-          border: none;
-          padding: 10px 15px;
-          border-radius: 5px;
-          cursor: pointer;
-          font-size: 14px;
-          transition: background-color 0.3s;
-        }
-        button:hover {
-          background-color: #2980b9;
-        }
-        .temp-control {
-          display: flex;
-          align-items: center;
-          margin-top: 10px;
-        }
-        input[type=range] {
-          flex: 1;
-          margin: 0 10px;
-        }
-        .attribute {
-          margin-bottom: 5px;
-        }
-        .attribute span {
-          font-weight: bold;
-        }
-        .rarity-Common { color: #7f8c8d; }
-        .rarity-Uncommon { color: #2ecc71; }
-        .rarity-Rare { color: #3498db; }
-        .rarity-Epic { color: #9b59b6; }
-        .rarity-Legendary { color: #f1c40f; }
-      </style>
+      <link rel="stylesheet" href="${styleUri}">
     </head>
     <body>
       <div class="container">
         <h1>🐢 ${attributes.getName()}</h1>
         
-        <div class="turtle-portrait">
-          🐢
-          ${attributes.getHat() ? `<div class="turtle-hat">${attributes.getHat()}</div>` : ''}
+        <div class="turtle-container idle">
+          <img src="${turtleIdleUri}" alt="Your Turtle" class="pixel-turtle shell-${attributes.getColor().toLowerCase()} eyes-${attributes.getEyeType().toLowerCase()} size-${attributes.getSize().toLowerCase()} rarity-${attributes.getShellRarity()}" id="turtle-image" />
+          ${hatUri ? `<img src="${hatUri}" alt="Hat" class="turtle-hat" />` : ''}
+          
+          <div class="temperature-indicator">
+            <div class="temperature-fill" style="height: ${Math.min(100, Math.max(0, ((needsStatus.temperature - 50) / 50) * 100))}%;"></div>
+            <div class="temperature-icon">🌡️</div>
+          </div>
         </div>
         
         <div class="turtle-info">
@@ -271,7 +204,7 @@ export class TurtleWebviewPanel {
           </div>
           
           <div class="info-section">
-            <div class="info-card">
+            <div class="info-card needs-panel">
               <h3>Needs</h3>
               <div>
                 <label>Food (${needs.getFoodStatus()}):</label>
@@ -308,7 +241,7 @@ export class TurtleWebviewPanel {
               </div>
             </div>
             
-            <div class="info-card">
+            <div class="info-card stats-panel">
               <h3>Stats</h3>
               <div>
                 <label>Durability (${stats.getDurabilityLevel()}):</label>
@@ -345,30 +278,93 @@ export class TurtleWebviewPanel {
         </div>
         
         <div class="actions">
-          <button id="feed-button">🥬 Feed</button>
-          <button id="water-button">💧 Give Water</button>
-          <button id="love-button">❤️ Pet</button>
-          <button id="clean-button">🧹 Clean</button>
-          <button id="temp-button">🌡️ Set Temperature</button>
+          <button id="feed-button" class="action-button">🥬 Feed</button>
+          <button id="water-button" class="action-button">💧 Give Water</button>
+          <button id="love-button" class="action-button">❤️ Pet</button>
+          <button id="clean-button" class="action-button">🧹 Clean</button>
+          <button id="temp-button" class="action-button">🌡️ Set Temperature</button>
         </div>
       </div>
       
       <script>
         const vscode = acquireVsCodeApi();
+        const turtleContainer = document.querySelector('.turtle-container');
+        const turtleImage = document.getElementById('turtle-image');
+        
+        // Image sources for different states
+        const turtleImages = {
+          idle: "${turtleIdleUri}",
+          eating: "${turtleEatingUri}",
+          walking: "${turtleWalkingUri}",
+          happy: "${turtleHappyUri}",
+          cleaning: "${turtleCleaningUri}"
+        };
+        
+        // Randomly make the turtle walk around
+        setInterval(() => {
+          if (Math.random() > 0.7 && !turtleContainer.classList.contains('eating') && 
+              !turtleContainer.classList.contains('happy') && !turtleContainer.classList.contains('cleaning')) {
+            turtleContainer.classList.remove('idle');
+            turtleContainer.classList.add('walking');
+            turtleImage.src = turtleImages.walking;
+            
+            setTimeout(() => {
+              turtleContainer.classList.remove('walking');
+              turtleContainer.classList.add('idle');
+              turtleImage.src = turtleImages.idle;
+            }, 3000);
+          }
+        }, 5000);
         
         document.getElementById('feed-button').addEventListener('click', () => {
+          // Show eating animation
+          turtleContainer.className = 'turtle-container eating';
+          turtleImage.src = turtleImages.eating;
+          
+          setTimeout(() => {
+            turtleContainer.className = 'turtle-container idle';
+            turtleImage.src = turtleImages.idle;
+          }, 2000);
+          
           vscode.postMessage({ command: 'feed' });
         });
         
         document.getElementById('water-button').addEventListener('click', () => {
+          // Show drinking animation (using walking animation for now)
+          turtleContainer.className = 'turtle-container walking';
+          turtleImage.src = turtleImages.walking;
+          
+          setTimeout(() => {
+            turtleContainer.className = 'turtle-container idle';
+            turtleImage.src = turtleImages.idle;
+          }, 2000);
+          
           vscode.postMessage({ command: 'giveWater' });
         });
         
         document.getElementById('love-button').addEventListener('click', () => {
+          // Show happy animation
+          turtleContainer.className = 'turtle-container happy';
+          turtleImage.src = turtleImages.happy;
+          
+          setTimeout(() => {
+            turtleContainer.className = 'turtle-container idle';
+            turtleImage.src = turtleImages.idle;
+          }, 2000);
+          
           vscode.postMessage({ command: 'giveLove' });
         });
         
         document.getElementById('clean-button').addEventListener('click', () => {
+          // Show cleaning animation
+          turtleContainer.className = 'turtle-container cleaning';
+          turtleImage.src = turtleImages.cleaning;
+          
+          setTimeout(() => {
+            turtleContainer.className = 'turtle-container idle';
+            turtleImage.src = turtleImages.idle;
+          }, 2000);
+          
           vscode.postMessage({ command: 'clean' });
         });
         

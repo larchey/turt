@@ -44,6 +44,14 @@ export enum Horoscope {
   Pisces = 'Pisces'
 }
 
+export enum HatType {
+  Party = 'Party',
+  Cowboy = 'Cowboy',
+  Crown = 'Crown',
+  Wizard = 'Wizard',
+  Chef = 'Chef'
+}
+
 export class TurtleAttributes {
   private shellType: string;
   private shellRarity: ShellRarity;
@@ -54,7 +62,7 @@ export class TurtleAttributes {
   private horoscope: Horoscope;
   private gender: TurtleGender;
   private name: string;
-  private hat: string | null;
+  private hat: HatType | null;
 
   constructor() {
     // Generate random attributes
@@ -248,7 +256,7 @@ export class TurtleAttributes {
     return this.name;
   }
 
-  public getHat(): string | null {
+  public getHat(): HatType | null {
     return this.hat;
   }
 
@@ -256,12 +264,19 @@ export class TurtleAttributes {
     this.name = name;
   }
 
-  public setHat(hat: string): void {
+  public setHat(hat: HatType): void {
     this.hat = hat;
   }
 
   public removeHat(): void {
     this.hat = null;
+  }
+
+  public unlockRandomHat(): HatType {
+    const hats = Object.values(HatType);
+    const randomHat = hats[Math.floor(Math.random() * hats.length)];
+    this.hat = randomHat;
+    return randomHat;
   }
 
   public static fromJSON(json: any): TurtleAttributes {
@@ -276,7 +291,7 @@ export class TurtleAttributes {
     if (json.horoscope) attributes.horoscope = json.horoscope as Horoscope;
     if (json.gender) attributes.gender = json.gender as TurtleGender;
     if (json.name) attributes.name = json.name;
-    if (json.hat) attributes.hat = json.hat;
+    if (json.hat) attributes.hat = json.hat as HatType;
     
     return attributes;
   }

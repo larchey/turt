@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Wizard Hat - Pixel Art Style -->
+  <rect x="16" y="36" width="16" height="4" fill="#3F51B5"/>
+  <rect x="12" y="32" width="24" height="4" fill="#3F51B5"/>
+  <rect x="16" y="24" width="16" height="8" fill="#3F51B5"/>
+  <rect x="20" y="12" width="8" height="12" fill="#3F51B5"/>
+  <rect x="20" y="4" width="8" height="8" fill="#3F51B5"/>
+  <!-- Hat Decorations - Stars -->
+  <rect x="24" y="28" width="4" height="4" fill="#FFEB3B"/>
+  <rect x="12" y="16" width="4" height="4" fill="#FFEB3B"/>
+  <rect x="32" y="20" width="4" height="4" fill="#FFEB3B"/>
+  <!-- Hat Tip - Star -->
+  <rect x="20" y="0" width="8" height="4" fill="#FFEB3B"/>
+</svg>

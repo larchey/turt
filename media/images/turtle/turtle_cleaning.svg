@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Turtle Cleaning Animation Frame - Pixel Art Style -->
+  <!-- Head (turning to the side) -->
+  <rect x="60" y="24" width="16" height="16" fill="#5D9C59"/>
+  <rect x="56" y="28" width="4" height="8" fill="#5D9C59"/>
+  <rect x="76" y="24" width="4" height="8" fill="#5D9C59"/>
+  <!-- Eyes -->
+  <rect x="62" y="28" width="4" height="4" fill="black"/>
+  <rect x="72" y="28" width="4" height="4" fill="black"/>
+  <!-- Shell (slightly tilted for cleaning) -->
+  <rect x="36" y="38" width="56" height="48" fill="#2D5C31"/>
+  <rect x="40" y="42" width="48" height="40" fill="#3D7A40"/>
+  <rect x="44" y="46" width="40" height="32" fill="#5D9C59"/>
+  <rect x="48" y="50" width="8" height="8" fill="#78B776"/>
+  <rect x="60" y="50" width="8" height="8" fill="#78B776"/>
+  <rect x="72" y="50" width="8" height="8" fill="#78B776"/>
+  <rect x="48" y="62" width="8" height="8" fill="#78B776"/>
+  <rect x="60" y="62" width="8" height="8" fill="#78B776"/>
+  <rect x="72" y="62" width="8" height="8" fill="#78B776"/>
+  <!-- Cleaning Tool (small brush) -->
+  <rect x="92" y="50" width="12" height="4" fill="#A87329"/>
+  <rect x="104" y="46" width="8" height="12" fill="#DEB887"/>
+  <!-- Front Legs (reaching for cleaning) -->
+  <rect x="76" y="82" width="16" height="8" fill="#5D9C59"/>
+  <rect x="40" y="82" width="12" height="8" fill="#5D9C59"/>
+  <!-- Back Legs -->
+  <rect x="32" y="58" width="8" height="12" fill="#5D9C59"/>
+  <rect x="88" y="58" width="8" height="12" fill="#5D9C59"/>
+  <!-- Tail -->
+  <rect x="60" y="86" width="8" height="4" fill="#5D9C59"/>
+  <rect x="60" y="90" width="8" height="4" fill="#4A7B48"/>
+  <!-- Cleaning bubbles -->
+  <rect x="96" y="38" width="4" height="4" fill="#E0F7FA"/>
+  <rect x="104" y="34" width="4" height="4" fill="#E0F7FA"/>
+  <rect x="112" y="40" width="4" height="4" fill="#E0F7FA"/>
+</svg>
